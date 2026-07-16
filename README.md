@@ -55,3 +55,14 @@ graph TD
     O --> P[Terapkan Pantulan jika Menabrak Dinding]
     P --> Q[Clear Layar & Render Segitiga Berotasi]
     Q --> C
+```
+---
+
+## 5. Penjelasan Implementasi Paralel yang Digunakan
+Paralelisme diterapkan pada bagian utama simulasi menggunakan OpenMP.
+Kalkulasi interaksi antar partikel merupakan proses terberat, karena setiap frame (60 kali per detik), program harus menghitung jarak dari 600 partikel ke 599 partikel lainnya (600 x 600 iterasi).
+
+Dengan menambahkan #pragma omp parallel for schedule(dynamic) pada loop kalkulasi interaksi, pembagian pekerjaan (workload) didistribusikan secara otomatis ke seluruh thread CPU. Hal ini memecah beban komputasi secara efisien sehingga simulasi partikel kompleks ini tetap berjalan real-time tanpa lag.
+
+## 6. Hasil Pengujian Program
+Berikut adalah bukti pengujian program:
