@@ -1,1 +1,57 @@
 # Tugas-Rancang-Pempar
+## 1. Identitas Praktikan
+* **Nama: Feliks Abednego Narendra P**
+* **NIM: 622023005**
+
+## 2. Setup Development Environment
+Proyek ini dikembangkan di lingkungan OS Linux. Berikut adalah langkah kompilasi dan pemasangan dependensinya:
+
+**Pemasangan Dependensi:**
+Dibutuhkan kompilator C++ (`g++`) yang mendukung OpenMP dan pustaka grafis SFML.
+`sudo apt update`
+`sudo apt install build-essential libsfml-dev`
+
+**Langkah Kompilasi:**
+Kompilasi dilakukan dengan menyertakan *flag* `-fopenmp` agar paralelisme berjalan.
+`g++ main.cpp -o simulasi -fopenmp -lsfml-graphics -lsfml-window -lsfml-system`
+
+---
+
+## 3. Penjelasan Cara Kerja Program
+Aplikasi ini adalah *particle system* 2D yang mensimulasikan pergerakan 600 partikel secara bersamaan (Boids). 
+
+Setiap partikel bergerak mengikuti 3 aturan interaksi utama terhadap partikel di sekitarnya:
+* **Separation:** Jika jarak dengan partikel lain sangat dekat (<20 piksel), partikel akan saling menjauh untuk menghindari tabrakan.
+* **Alignment:** Partikel menghitung rata-rata kecepatan partikel di sekitarnya dan menyamakan arah geraknya.
+* **Cohesion:** Partikel mencari titik pusat massa dari kawanannya dan bergerak mendekat agar tetap bergerombol.
+
+---
+## 4. Flowchart Program
+Berikut adalah bagan alir dari simulasi interaksi Boids berdasarkan implementasi kode:
+
+```mermaid
+graph TD
+    A([Mulai Program]) --> B[Inisialisasi Window SFML 1000x700 & 600 Boids]
+    B --> C{Apakah Window.isOpen?}
+    C -- TIDAK --> D([Program Selesai])
+    C -- YA --> E[Cek Event Close / Tutup Window]
+    
+    E --> F[Membagi Workload dengan #pragma omp parallel for]
+    F --> G[Iterasi Setiap Boid ke-i]
+    G --> H[Kalkulasi Jarak dengan Semua Boid ke-j]
+    
+    H --> I{Apakah Jarak < 50.0?}
+    I -- YA --> J[Akumulasi Gaya Alignment & Cohesion]
+    I -- TIDAK --> N
+    
+    J --> K{Apakah Jarak < 20.0?}
+    K -- YA --> L[Tambahkan Gaya Separation]
+    K -- TIDAK --> M
+    
+    L --> M[Hitung Rata-rata Arah & Pusat Massa]
+    M --> N[Gabungkan Gaya Total ke Akselerasi Boid ke-i]
+    
+    N --> O[Update Kecepatan, Limit Speed, & Posisi]
+    O --> P[Terapkan Pantulan jika Menabrak Dinding]
+    P --> Q[Clear Layar & Render Segitiga Berotasi]
+    Q --> C
