@@ -1,4 +1,5 @@
 # Tugas-Rancang-Pempar
+
 ## 1. Identitas Praktikan
 * **Nama: Feliks Abednego Narendra P**
 * **NIM: 622023005**
@@ -66,3 +67,17 @@ Dengan menambahkan #pragma omp parallel for schedule(dynamic) pada loop kalkulas
 
 ## 6. Hasil Pengujian Program
 Berikut adalah bukti pengujian program:
+
+**Bukti Kompilasi Tanpa Error:**
+![Hasil Kompilasi](assets/Hasil%20Kompilasi.png)
+
+**Bukti Simulasi Berjalan (Visualisasi Grafis):**
+![Visualisasi Simulasi](assets/Visualisasi.png)
+
+## 7. Dokumentasi Penggunaan Program
+Program ini disertakan dalam bentuk *prebuilt binary* Linux bernama `simulasi`.
+1. Buka Terminal pada direktori tempat file biner ini berada.
+2. Jalankan program dengan mengetik perintah:
+   ```
+   ./simulasi
+   ```
