@@ -67,7 +67,13 @@ Dengan menambahkan #pragma omp parallel for schedule(dynamic) pada loop kalkulas
 ## 6. Hasil Pengujian Program
 Pengujian dilakukan untuk memastikan fungsionalitas simulasi, interaksi fisika antar partikel, dan memverifikasi penerapan paralelisasi OpenMP. 
 
-Berikut adalah rekapitulasi hasil pengujian simulasi yang dijalankan dengan memvariasikan jumlah *thread* CPU:
+Bukti Waktu dan eksekusi
+
+![Hasil Terminal](assets/Hasil%20Terminal%20ketika%20Sudah%20dijalankan.png)
+
+Gambar di atas adalah tampilan terminal sesaat setelah jendela simulasi ditutup. Seperti yang terlihat, program berhasil memproses 600 partikel (*boids*) menggunakan 4 *thread* CPU secara paralel. Pada pengujian ini, simulasi dibiarkan berjalan selama 10,622 detik. Munculnya rekapitulasi otomatis ini membuktikan bahwa program sukses membagi beban komputasi di latar belakang menggunakan OpenMP dan berhasil ditutup tanpa adanya *crash* (status valid/selesai).
+
+Berikut adalah hasil pengujian simulasi yang dijalankan dengan memvariasikan jumlah *thread* CPU:
 
 | Pengujian | Jumlah Partikel | Jumlah Thread | Waktu Eksekusi | Status Verifikasi |
 | :---: | :---: | :---: | :---: | :---: |
@@ -79,19 +85,7 @@ Berikut adalah rekapitulasi hasil pengujian simulasi yang dijalankan dengan memv
 
 **b. Bukti Simulasi Berjalan (Visualisasi Grafis)**
 ![Visualisasi Simulasi](assets/Visualisasi.png)
-> **Keterangan:** Simulasi berhasil dirender menggunakan SFML. Terlihat 600 partikel bergerak dinamis dan memunculkan perilaku *flocking* (kawanan) secara *real-time*, membuktikan bahwa perhitungan gaya *Separation*, *Alignment*, dan *Cohesion* yang diparalelkan berfungsi dengan presisi tinggi.
-
-## 6. Hasil Pengujian Program
-Berikut adalah bukti pengujian yang menunjukkan bahwa program dapat dieksekusi berjalan sesuai rancangan:
-
-**a. Bukti Kompilasi Tanpa Error**
-![Hasil Kompilasi](assets/Hasil%20Kompilasi.png)
-
-**Keterangan:** Gambar di atas membuktikan bahwa *source code* berhasil dikompilasi menggunakan GCC dengan *flag* `-fopenmp` tanpa memunculkan *error* penghentian (peringatan *V-Sync* murni karena keterbatasan *driver* layar di dalam Virtual Machine, namun program tetap lolos kompilasi menjadi *executable* binari).
-
-
-**b. Bukti Simulasi Berjalan (Visualisasi Grafis):**
-![Visualisasi Simulasi](assets/Visualisasi.png)
+Simulasi berhasil dirender menggunakan SFML. Terlihat 600 partikel bergerak dinamis dan memunculkan perilaku *flocking* (kawanan) secara *real-time*, membuktikan bahwa perhitungan gaya *Separation*, *Alignment*, dan *Cohesion* yang diparalelkan berfungsi dengan presisi tinggi.
 
 ## Keterangan Hasil Pengujian Visual:
 Berdasarkan tangkapan layar di atas, program berhasil merender lingkungan simulasi secara stabil menggunakan SFML. Berikut adalah analisis perilakunya:
