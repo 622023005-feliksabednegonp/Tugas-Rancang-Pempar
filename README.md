@@ -65,6 +65,23 @@ Kalkulasi interaksi antar partikel merupakan proses terberat, karena setiap fram
 Dengan menambahkan #pragma omp parallel for schedule(dynamic) pada loop kalkulasi interaksi, pembagian pekerjaan (workload) didistribusikan secara otomatis ke seluruh thread CPU. Hal ini memecah beban komputasi secara efisien sehingga simulasi partikel kompleks ini tetap berjalan real-time tanpa lag.
 
 ## 6. Hasil Pengujian Program
+Pengujian dilakukan untuk memastikan fungsionalitas simulasi, interaksi fisika antar partikel, dan memverifikasi penerapan paralelisasi OpenMP. 
+
+Berikut adalah rekapitulasi hasil pengujian simulasi yang dijalankan dengan memvariasikan jumlah *thread* CPU:
+
+| Pengujian | Jumlah Partikel | Jumlah Thread | Waktu Eksekusi | Status Verifikasi |
+| :---: | :---: | :---: | :---: | :---: |
+| 1 | 600 elemen | 4 Thread | [10.622] detik | Valid (Selesai) |
+
+**a. Bukti Kompilasi & Laporan Terminal**
+![Hasil Kompilasi](assets/Hasil%20Kompilasi.png)
+> **Keterangan:** Gambar di atas membuktikan bahwa *source code* berhasil dikompilasi menggunakan GCC dengan *flag* `-fopenmp`. Program berhasil mendistribusikan beban kerja (*workload*) dan mencetak laporan metrik secara otomatis setelah simulasi dihentikan.
+
+**b. Bukti Simulasi Berjalan (Visualisasi Grafis)**
+![Visualisasi Simulasi](assets/Visualisasi.png)
+> **Keterangan:** Simulasi berhasil dirender menggunakan SFML. Terlihat 600 partikel bergerak dinamis dan memunculkan perilaku *flocking* (kawanan) secara *real-time*, membuktikan bahwa perhitungan gaya *Separation*, *Alignment*, dan *Cohesion* yang diparalelkan berfungsi dengan presisi tinggi.
+
+## 6. Hasil Pengujian Program
 Berikut adalah bukti pengujian yang menunjukkan bahwa program dapat dieksekusi berjalan sesuai rancangan:
 
 **a. Bukti Kompilasi Tanpa Error**
