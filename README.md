@@ -70,17 +70,17 @@ Berikut adalah bukti pengujian yang menunjukkan bahwa program dapat dieksekusi b
 **a. Bukti Kompilasi Tanpa Error**
 ![Hasil Kompilasi](assets/Hasil%20Kompilasi.png)
 
-> **Keterangan:** Gambar di atas membuktikan bahwa *source code* berhasil dikompilasi menggunakan GCC dengan *flag* `-fopenmp` tanpa memunculkan *error* penghentian (peringatan *V-Sync* murni karena keterbatasan *driver* layar di dalam Virtual Machine, namun program tetap lolos kompilasi menjadi *executable* binari).
+**Keterangan:** Gambar di atas membuktikan bahwa *source code* berhasil dikompilasi menggunakan GCC dengan *flag* `-fopenmp` tanpa memunculkan *error* penghentian (peringatan *V-Sync* murni karena keterbatasan *driver* layar di dalam Virtual Machine, namun program tetap lolos kompilasi menjadi *executable* binari).
 
 
 **b. Bukti Simulasi Berjalan (Visualisasi Grafis):**
 ![Visualisasi Simulasi](assets/Visualisasi.png)
 
-> **Keterangan Hasil Pengujian Visual:**
-> Berdasarkan tangkapan layar di atas, program berhasil merender lingkungan simulasi secara stabil menggunakan SFML. Berikut adalah analisis perilakunya:
-> 1. **Rendering Partikel:** 600 partikel berhasil digambar dalam bentuk segitiga dengan palet warna gradasi (biru, ungu, merah muda). Ujung segitiga secara akurat berotasi menghadap ke arah vektor pergerakan masing-masing partikel.
-> 2. **Distribusi dan Boundary:** Partikel-partikel tampak menyebar dan berkerumun di area tepi layar, membentuk ruang kosong yang besar di tengah. Hal ini membuktikan bahwa logika interaksi lingkungan (pantulan dinding/tepi layar) berfungsi dengan baik saat partikel mencoba menyebar ke luar.
-> 3. **Interaksi Boids:** Meskipun berkerumun padat di pinggiran, partikel-partikel tidak saling bertumpuk di satu titik yang sama. Ini memvalidasi bahwa gaya **Separation** (tolak-menolak jarak dekat) berhasil dieksekusi oleh OpenMP, sementara gaya **Alignment** dan **Cohesion** menjaga mereka tetap bergerak dalam aliran yang dinamis di sepanjang tepi layar.
+## Keterangan Hasil Pengujian Visual:
+Berdasarkan tangkapan layar di atas, program berhasil merender lingkungan simulasi secara stabil menggunakan SFML. Berikut adalah analisis perilakunya:
+1. **Rendering Partikel:** 600 partikel berhasil digambar dalam bentuk segitiga dengan palet warna gradasi (biru, ungu, merah muda). Ujung segitiga secara akurat berotasi menghadap ke arah vektor pergerakan masing-masing partikel.
+2. **Distribusi dan Boundary:** Partikel-partikel tampak menyebar dan berkerumun di area tepi layar, membentuk ruang kosong yang besar di tengah. Hal ini membuktikan bahwa logika interaksi lingkungan (pantulan dinding/tepi layar) berfungsi dengan baik saat partikel mencoba menyebar ke luar.
+3. **Interaksi Boids:** Meskipun berkerumun padat di pinggiran, partikel-partikel tidak saling bertumpuk di satu titik yang sama. Ini memvalidasi bahwa gaya **Separation** (tolak-menolak jarak dekat) berhasil dieksekusi oleh OpenMP, sementara gaya **Alignment** dan **Cohesion** menjaga mereka tetap bergerak dalam aliran yang dinamis di sepanjang tepi layar.
 
 ## 7. Dokumentasi Penggunaan Program
 Program ini disertakan dalam bentuk *prebuilt binary* Linux bernama `simulasi`.
